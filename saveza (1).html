@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saveza — Rewards for the way you spend</title>
+<meta name="description" content="Saveza is a consumer rewards platform that helps people in India discover cashback and offers on eligible purchases and payments, and track the rewards they qualify for.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230F6E5C'/%3E%3Cpath d='M43 21c-2.5-4.5-8.6-5.6-13-3.3-4.6 2.4-5.2 8.3-.6 10.7 3.6 1.9 9.4 1.6 12.9 3.6 4.6 2.6 4.2 8.6-.5 11-4.6 2.4-11 1-13.4-3.6' fill='none' stroke='%23F2A63B' stroke-width='5.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#08312B; --ink-2:#0E453C;
+  --brand:#0F6E5C; --brand-600:#0B584A; --brand-tint:#E8F3F0;
+  --gold:#F2A63B; --gold-tint:#FDF2E0; --coral:#FF6B5B;
+  --paper:#F6F8F7; --white:#fff;
+  --text:#0B211E; --muted:#5A716C; --line:#E3EAE7;
+  --ok:#12805F; --warn:#B4690E; --stop:#B3261E;
+  --r-card:18px; --r-lg:26px; --r-sm:10px;
+  --shadow-1:0 1px 2px rgba(8,49,43,.06), 0 4px 14px rgba(8,49,43,.05);
+  --shadow-2:0 10px 34px rgba(8,49,43,.11);
+  --wrap:1160px;
+  --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --display:'Bricolage Grotesque','Inter',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);font-weight:800;letter-spacing:-.025em;line-height:1.08;margin:0}
+h1{font-size:clamp(2.3rem,5.4vw,3.9rem)}
+h2{font-size:clamp(1.7rem,3.4vw,2.6rem)}
+h3{font-size:1.15rem;letter-spacing:-.015em;line-height:1.3}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 22px}
+.section{padding:76px 0}
+.section-tight{padding:52px 0}
+.lede{font-size:1.06rem;color:var(--muted);max-width:62ch}
+.stack{display:flex;flex-direction:column;gap:14px}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:6px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:12px;z-index:99;background:#fff;padding:10px 16px;border-radius:8px}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:.95rem;border-radius:999px;padding:13px 24px;border:1.5px solid transparent;cursor:pointer;text-decoration:none;transition:background .16s,border-color .16s,color .16s}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-primary:hover{background:var(--brand-600)}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand)}
+.btn-quiet{background:transparent;color:var(--brand);padding:10px 4px;font-weight:600}
+.btn-gold{background:var(--gold);color:#3B2606}
+.btn-gold:hover{background:#E39724}
+.btn-sm{padding:9px 16px;font-size:.86rem}
+.btn-block{width:100%}
+.linky{color:var(--brand);font-weight:600;text-decoration:none;border-bottom:1.5px solid rgba(15,110,92,.28);padding-bottom:1px}
+.linky:hover{border-bottom-color:var(--brand)}
+
+/* ---------- chips / badges ---------- */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;font-weight:600;padding:5px 10px;border-radius:var(--r-sm);background:var(--brand-tint);color:var(--brand-600)}
+.chip-sample{background:#F1EFFA;color:#5B4BAA}
+.chip-gold{background:var(--gold-tint);color:var(--warn)}
+.chip-line{background:#fff;border:1px solid var(--line);color:var(--muted);font-weight:500}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
+
+/* ---------- header ---------- */
+.hdr{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;gap:26px;height:70px}
+.brandlink{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.nav{display:flex;gap:4px;margin-left:6px}
+.nav a{text-decoration:none;font-size:.93rem;font-weight:500;color:var(--muted);padding:8px 12px;border-radius:9px}
+.nav a:hover{color:var(--ink);background:var(--brand-tint)}
+.nav a.on{color:var(--brand-600);background:var(--brand-tint);font-weight:600}
+.hdr-act{margin-left:auto;display:flex;gap:10px;align-items:center}
+.burger{display:none;margin-left:auto;background:#fff;border:1.5px solid var(--line);border-radius:11px;width:44px;height:44px;align-items:center;justify-content:center;cursor:pointer}
+.mnav{display:none;border-bottom:1px solid var(--line);background:#fff;padding:10px 0 20px}
+.mnav.open{display:block}
+.mnav a{display:block;text-decoration:none;padding:12px 4px;font-weight:500;border-bottom:1px solid var(--line);color:var(--ink)}
+.mnav .mact{display:flex;gap:10px;margin-top:16px}
+
+/* ---------- hero ---------- */
+.hero{background:linear-gradient(174deg,#EFF6F3 0%,#FBFCFB 62%,var(--paper) 100%);border-bottom:1px solid var(--line);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:52px;align-items:center;padding:64px 0 70px}
+.hero h1{max-width:14ch}
+.hero .lede{margin-top:20px;font-size:1.14rem;color:#3F5A55}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.hero-fine{margin-top:16px;font-size:.86rem;color:var(--muted)}
+.hero-art{position:relative}
+
+/* ---------- generic cards ---------- */
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow-1)}
+.pad{padding:22px}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:26px;flex-wrap:wrap}
+.head p{margin-top:10px}
+
+/* ---------- trust ---------- */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.trust-i{padding:26px 24px;border-right:1px solid var(--line)}
+.trust-i:last-child{border-right:0}
+.trust-i h3{margin:14px 0 7px}
+.trust-i p{font-size:.92rem;color:var(--muted)}
+.tico{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:var(--brand-tint);color:var(--brand)}
+
+/* ---------- offer coupon card ---------- */
+.offer{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow-1);display:flex;flex-direction:column;transition:box-shadow .18s,border-color .18s}
+.offer:hover{box-shadow:var(--shadow-2);border-color:#CFDDD8}
+.offer-top{padding:18px 20px 20px}
+.offer-strip{height:76px;border-radius:14px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;margin-bottom:15px;color:#fff}
+.offer-strip .amt{font-family:var(--display);font-weight:800;font-size:1.75rem;letter-spacing:-.03em}
+.offer-strip .amt span{font-size:1.05rem;font-weight:700;opacity:.9}
+.offer h3{font-size:1.02rem;margin-bottom:6px}
+.offer-mer{font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.perf{position:relative;height:1px;margin:0 14px;border-top:1.5px dashed #D6E2DE}
+.perf::before,.perf::after{content:"";position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;background:var(--paper);border:1px solid var(--line)}
+.perf::before{left:-23px;clip-path:inset(0 0 0 50%)}
+.perf::after{right:-23px;clip-path:inset(0 50% 0 0)}
+.offer-bot{padding:16px 20px 18px}
+.kv{display:flex;justify-content:space-between;gap:14px;font-size:.85rem;padding:5px 0}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.offer-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.expiry{font-size:.8rem;color:var(--muted)}
+.expiry.soon{color:var(--warn);font-weight:600}
+.offers-page{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+
+/* ---------- filters ---------- */
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:24px}
+.field{background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:11px 14px;font:inherit;font-size:.92rem;color:var(--text);min-width:0}
+.field:focus{border-color:var(--brand);outline:none}
+.search{flex:1;min-width:220px}
+.pills{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:22px}
+.pill{flex:none;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:8px 15px;font-size:.87rem;font-weight:500;cursor:pointer;color:var(--muted);white-space:nowrap}
+.pill.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* ---------- categories ---------- */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cat{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);padding:20px;text-decoration:none;display:block;transition:transform .16s,box-shadow .16s}
+.cat:hover{transform:translateY(-2px);box-shadow:var(--shadow-2)}
+.cat-ico{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.cat h3{font-size:1rem}
+.cat p{font-size:.85rem;color:var(--muted);margin-top:5px}
+.cat .count{font-size:.8rem;font-weight:600;color:var(--brand);margin-top:12px;display:block}
+
+/* ---------- steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
+.step{position:relative;padding-top:52px}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:0;left:0;width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--gold);font-family:var(--display);font-weight:700;font-size:1.05rem;display:flex;align-items:center;justify-content:center}
+.step h3{margin-bottom:8px}
+.step p{font-size:.93rem;color:var(--muted)}
+
+/* ---------- calculator ---------- */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.calc-in{padding:30px}
+.calc-out{padding:30px;background:linear-gradient(160deg,var(--ink) 0%,#0B4A3F 100%);color:#DCEBE7}
+.lbl{display:block;font-size:.87rem;font-weight:600;color:var(--muted);margin-bottom:7px}
+.calc-in .field{width:100%}
+.range{width:100%;accent-color:var(--brand);margin-top:14px}
+.bigrup{font-family:var(--display);font-weight:800;font-size:3.1rem;letter-spacing:-.04em;color:#fff;line-height:1}
+.bigrup span{color:var(--gold);font-size:1.7rem;vertical-align:.28em;margin-right:2px}
+.calc-line{display:flex;justify-content:space-between;font-size:.9rem;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.16)}
+.calc-line b{font-variant-numeric:tabular-nums;color:#fff;font-weight:600}
+.calc-note{font-size:.84rem;margin-top:16px;color:#9FC2BB}
+.badge-fail{background:rgba(255,107,91,.16);color:#FFC2BA;border-radius:9px;padding:10px 12px;font-size:.87rem;margin-top:14px}
+
+/* ---------- tables ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:.9rem}
+.tbl th{text-align:left;font-weight:600;color:var(--muted);font-size:.83rem;padding:12px 14px;border-bottom:1px solid var(--line)}
+.tbl td{padding:14px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+.st{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;font-weight:600}
+.st-pending{color:var(--warn)} .st-confirmed{color:var(--brand)} .st-credited{color:var(--ok)} .st-rejected{color:var(--stop)}
+
+/* ---------- faq ---------- */
+.faq{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden}
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:last-child{border-bottom:0}
+.faq summary{padding:18px 22px;cursor:pointer;font-weight:600;font-size:.98rem;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.4rem;color:var(--brand);font-weight:400;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq .ans{padding:0 22px 20px;color:var(--muted);font-size:.94rem;max-width:74ch}
+
+/* ---------- prose ---------- */
+.prose{max-width:70ch}
+.prose h2{margin:38px 0 14px}
+.prose h3{margin:26px 0 8px}
+.prose p,.prose li{color:#38504B;font-size:1rem}
+.prose p{margin-bottom:14px}
+.prose ul{padding-left:20px;margin:0 0 16px}
+.prose li{margin-bottom:8px}
+
+/* ---------- business info ---------- */
+.bizgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 30px}
+.bizrow{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:.9rem}
+.bizrow dt{color:var(--muted);flex:none}
+.bizrow dd{margin:0;text-align:right;font-weight:500}
+.ph{background:#FFF4E5;border:1px dashed #E2B366;color:#8A5A08;border-radius:6px;padding:1px 7px;font-size:.82rem;font-weight:600}
+
+/* ---------- footer ---------- */
+.ftr{background:var(--ink);color:#B9D2CD;padding:60px 0 30px;margin-top:20px}
+.ftr h4{font-family:var(--sans);font-size:.88rem;font-weight:600;color:#fff;margin:0 0 14px}
+.ftr a{color:#B9D2CD;text-decoration:none;font-size:.9rem;display:block;padding:5px 0}
+.ftr a:hover{color:#fff}
+.ftr-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
+.ftr-legal{margin-top:30px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem;color:#8FB6AE;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.disc{font-size:.82rem;color:#8FB6AE;max-width:78ch;margin-top:14px;line-height:1.65}
+
+/* ---------- modal / drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(6,32,28,.5);z-index:60;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:#fff;border-radius:var(--r-lg);max-width:430px;width:100%;padding:30px;box-shadow:var(--shadow-2);max-height:90vh;overflow:auto}
+.drawer{background:#fff;border-radius:var(--r-lg);max-width:560px;width:100%;max-height:88vh;overflow:auto;box-shadow:var(--shadow-2)}
+.x{background:#fff;border:1px solid var(--line);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1.1rem;line-height:1;color:var(--muted)}
+.mrow{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px}
+.callout{background:var(--brand-tint);border-radius:12px;padding:14px 16px;font-size:.88rem;color:var(--ink-2);margin-top:16px}
+
+/* ---------- misc ---------- */
+.hero-anim{opacity:0;transform:translateY(8px) scale(.97);animation:pop .55s cubic-bezier(.2,.8,.3,1) .5s forwards}
+@keyframes pop{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero-anim{opacity:1;transform:none}}
+
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:34px;padding:46px 0 54px}
+  .hero-art{max-width:420px}
+  .nav,.hdr-act{display:none}
+  .burger{display:flex}
+  .trust,.g4,.cats,.steps,.offers-page,.g3{grid-template-columns:repeat(2,1fr)}
+  .trust-i{border-right:0;border-bottom:1px solid var(--line)}
+  .trust-i:nth-child(2n){border-right:0}
+  .trust-i:nth-child(odd){border-right:1px solid var(--line)}
+  .calc,.ftr-grid{grid-template-columns:1fr}
+  .section{padding:56px 0}
+}
+@media (max-width:640px){
+  .g2,.g3,.g4,.cats,.steps,.offers-page,.trust,.bizgrid{grid-template-columns:1fr}
+  .trust-i:nth-child(odd){border-right:0}
+  .ftr-legal{flex-direction:column;gap:8px}
+  .section{padding:44px 0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brandlink" href="#/" aria-label="Saveza home"><span id="logo-slot"></span></a>
+    <nav class="nav" id="nav" aria-label="Main"></nav>
+    <div class="hdr-act">
+      <button class="btn btn-ghost btn-sm" data-auth="login">Log in</button>
+      <button class="btn btn-primary btn-sm" data-auth="join">Join Saveza</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="#08312B" stroke-width="2" stroke-linecap="round"><path d="M1 1h18M1 7h18M1 13h18"/></svg>
+    </button>
+  </div>
+  <div class="mnav" id="mnav"><div class="wrap"></div></div>
+</header>
+<main id="main"></main>
+<footer class="ftr" id="ftr"></footer>
+<div id="overlay"></div>
+<script>
+/* ============================================================
+   SAVEZA — front-end reference build
+   Everything below runs client-side. There is no backend, no
+   auth, no payment integration and no real reward ledger.
+   Sample offers are flagged with sample:true and must be
+   replaced by real records from the offers database.
+   ============================================================ */
+
+/* ---------- 1. ADMIN CONFIG -------------------------------
+   Replace EVERY value that begins with "[REPLACE" before this
+   site goes to production. The banner at the top of the page
+   stays visible until all of them are replaced.
+   Delete keys that genuinely do not apply (e.g. gstin if the
+   business is not GST-registered) rather than inventing one. */
+const SITE_CONFIG = {
+  legalBusinessName: "[REPLACE: REGISTERED LEGAL BUSINESS NAME]",
+  brand:             "Saveza",
+  entityType:        "[REPLACE: PRIVATE LIMITED / LLP / PROPRIETORSHIP]",
+  addressLine1:      "[REPLACE: REGISTERED ADDRESS LINE 1]",
+  addressLine2:      "[REPLACE: REGISTERED ADDRESS LINE 2]",
+  city:              "[REPLACE: CITY]",
+  state:             "[REPLACE: STATE]",
+  pincode:           "[REPLACE: PIN CODE]",
+  country:           "India",
+  supportEmail:      "[REPLACE: SUPPORT EMAIL]",
+  supportPhone:      "[REPLACE: SUPPORT PHONE]",
+  supportHours:      "[REPLACE: SUPPORT HOURS]",
+  grievanceOfficer:  "[REPLACE: GRIEVANCE OFFICER NAME]",
+  grievanceEmail:    "[REPLACE: GRIEVANCE EMAIL]",
+  businessReg:       "[REPLACE: CIN / LLPIN / UDYAM NUMBER — OR DELETE]",
+  gstin:             "[REPLACE: GSTIN — OR DELETE IF NOT REGISTERED]",
+  lastUpdated:       "[REPLACE: POLICY LAST-UPDATED DATE]"
+};
+const isPh = v => typeof v === "string" && v.startsWith("[REPLACE");
+const cfg = k => { const v = SITE_CONFIG[k]; return isPh(v) ? `<span class="ph">${v}</span>` : v; };
+const cfgText = k => SITE_CONFIG[k];
+const unresolved = () => Object.entries(SITE_CONFIG).filter(([,v]) => isPh(v)).map(([k]) => k);
+
+/* ---------- 2. CATEGORIES ---------- */
+const I = {
+  bag:'<path d="M4 8h16l-1.2 12.5a1.5 1.5 0 0 1-1.5 1.4H6.7a1.5 1.5 0 0 1-1.5-1.4L4 8Z"/><path d="M8.5 10.5V6.8a3.5 3.5 0 0 1 7 0v3.7"/>',
+  food:'<path d="M6 3v8a3 3 0 0 0 6 0V3"/><path d="M9 11v10"/><path d="M18 3c-1.7 1.2-2.5 3.2-2.5 5.5S16.3 13 18 14v7"/>',
+  cart:'<path d="M4 5h2.2l2.3 10.6a1.6 1.6 0 0 0 1.6 1.3h7.4a1.6 1.6 0 0 0 1.6-1.2L20.6 8H7"/><circle cx="10" cy="20.4" r="1.3"/><circle cx="17.6" cy="20.4" r="1.3"/>',
+  plane:'<path d="M10.6 3.6a1.6 1.6 0 0 1 2.8 0L15.7 9l5.1 1.6a1.2 1.2 0 0 1 .2 2.2l-4.6 2.4-.5 5.3a1 1 0 0 1-1.8.5L12 17.4l-2.1 3.6a1 1 0 0 1-1.8-.5l-.5-5.3L3 12.8a1.2 1.2 0 0 1 .2-2.2L8.3 9Z"/>',
+  hanger:'<path d="M12 8a2.6 2.6 0 1 1 2.6-2.6"/><path d="M12 8v2.2L3.7 16a1.4 1.4 0 0 0 .8 2.6h15a1.4 1.4 0 0 0 .8-2.6L12 10.2"/>',
+  chip:'<rect x="4.5" y="4.5" width="15" height="15" rx="3"/><rect x="9" y="9" width="6" height="6" rx="1.2"/><path d="M9 2.6v2M15 2.6v2M9 19.4v2M15 19.4v2M2.6 9h2M2.6 15h2M19.4 9h2M19.4 15h2"/>',
+  play:'<rect x="2.6" y="5" width="18.8" height="14" rx="3"/><path d="M10.4 9.6 14.8 12l-4.4 2.4Z"/>',
+  phone:'<rect x="6.5" y="2.6" width="11" height="18.8" rx="2.6"/><path d="M10.6 18.6h2.8"/>',
+  bill:'<path d="M6 2.8h12v18.4l-2.4-1.6-2.4 1.6-2.4-1.6-2.4 1.6Z"/><path d="M9.4 8h5.2M9.4 12h5.2"/>',
+  spark:'<path d="M12 2.8c.9 4.5 3.8 7.4 8.3 8.3-4.5.9-7.4 3.8-8.3 8.3-.9-4.5-3.8-7.4-8.3-8.3 4.5-.9 7.4-3.8 8.3-8.3Z"/>',
+  heart:'<path d="M12 20.4S3.6 15.6 3.6 9.7A4.7 4.7 0 0 1 12 6.8a4.7 4.7 0 0 1 8.4 2.9c0 5.9-8.4 10.7-8.4 10.7Z"/><path d="M2.8 12.6h4l1.6-2.4 2 4.4 1.8-3"/>',
+  pin:'<path d="M12 21.4s7-5.7 7-11a7 7 0 1 0-14 0c0 5.3 7 11 7 11Z"/><circle cx="12" cy="10.2" r="2.6"/>',
+  eye:'<path d="M2.4 12S6 5.6 12 5.6 21.6 12 21.6 12 18 18.4 12 18.4 2.4 12 2.4 12Z"/><circle cx="12" cy="12" r="3"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.4 2"/>',
+  doc:'<path d="M13.4 3H6.6A1.6 1.6 0 0 0 5 4.6v14.8A1.6 1.6 0 0 0 6.6 21h10.8a1.6 1.6 0 0 0 1.6-1.6V8.4Z"/><path d="M13.4 3v5.4H19"/><path d="M8.6 13h6.8M8.6 16.6h4.4"/>',
+  chat:'<path d="M20.4 15a2.4 2.4 0 0 1-2.4 2.4H8.4L4 21.2V5.4A2.4 2.4 0 0 1 6.4 3H18a2.4 2.4 0 0 1 2.4 2.4Z"/>',
+  shield:'<path d="M12 21.4c4.4-1.6 7-5.2 7-9.6V5.6L12 2.8 5 5.6v6.2c0 4.4 2.6 8 7 9.6Z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/>'
+};
+const ico = (p, s=22, c="currentColor", w=1.7) =>
+  `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+
+const CATEGORIES = [
+  {k:"shopping",  n:"Shopping",         d:"Marketplace and retail offers",        c:"#0F6E5C", bg:"#E5F2EE", i:I.bag},
+  {k:"food",      n:"Food",             d:"Dining and delivery",                  c:"#D4562B", bg:"#FCEBE4", i:I.food},
+  {k:"grocery",   n:"Grocery",          d:"Daily and monthly essentials",         c:"#3F7D20", bg:"#EAF3E4", i:I.cart},
+  {k:"travel",    n:"Travel",           d:"Trains, flights, buses and stays",     c:"#1E63A8", bg:"#E4EEF8", i:I.plane},
+  {k:"fashion",   n:"Fashion",          d:"Clothing, footwear, accessories",      c:"#A63472", bg:"#F8E7F1", i:I.hanger},
+  {k:"electronics",n:"Electronics",     d:"Phones, laptops and appliances",       c:"#5B4BAA", bg:"#EDEAF8", i:I.chip},
+  {k:"entertainment",n:"Entertainment", d:"Streaming, events and tickets",        c:"#B4402F", bg:"#FBE8E5", i:I.play},
+  {k:"recharge",  n:"Recharge",         d:"Prepaid and DTH recharges",            c:"#0B7285", bg:"#E1F1F4", i:I.phone},
+  {k:"bills",     n:"Bill Payments",    d:"Utilities and postpaid bills",         c:"#8A6A0B", bg:"#F8F0DC", i:I.bill},
+  {k:"beauty",    n:"Beauty",           d:"Skincare, cosmetics and salons",       c:"#C4437A", bg:"#FAE8F0", i:I.spark},
+  {k:"health",    n:"Health & Wellness",d:"Pharmacy, labs and fitness",           c:"#127A63", bg:"#E2F2EE", i:I.heart},
+  {k:"local",     n:"Local Offers",     d:"Deals from nearby stores",             c:"#6B5B3E", bg:"#F2EEE5", i:I.pin}
+];
+const catBy = k => CATEGORIES.find(c => c.k === k) || CATEGORIES[0];
+
+/* ---------- 3. SAMPLE OFFERS ------------------------------
+   DEVELOPMENT DATA ONLY. Merchant names are deliberately
+   obvious placeholders so nothing here can be mistaken for a
+   real brand or a real live offer. Replace the whole array
+   with rows from the offers table before launch. */
+const OFFERS = [
+  {id:"SMP-1001", sample:true, title:"Cashback on eligible electronics purchases", merchant:"Sample Electronics Store", cat:"electronics", type:"percent", rate:5, cap:250, min:1999, methods:["Credit card","Debit card","Net banking"], credit:"Within 30 days of a verified transaction", expiry:"2026-10-31", terms:["Reward applies to the transaction value excluding shipping, taxes and any coupon already applied.","One reward per user per calendar month under this offer.","Cancelled, returned or partially refunded orders are not eligible.","The reward is confirmed only after the merchant confirms the transaction."]},
+  {id:"SMP-1002", sample:true, title:"Flat reward on your first grocery order", merchant:"Demo Grocery Mart", cat:"grocery", type:"flat", rate:75, cap:75, min:599, methods:["UPI","Debit card"], credit:"Within 15 days of a verified transaction", expiry:"2026-09-30", terms:["Valid once per user, on a first order placed through Saveza.","Minimum order value is calculated before delivery charges.","Not combinable with other Saveza offers on the same order."]},
+  {id:"SMP-1003", sample:true, title:"Cashback on domestic train and bus bookings", merchant:"Placeholder Travel Desk", cat:"travel", type:"percent", rate:4, cap:400, min:1500, methods:["Credit card","Net banking"], credit:"After the travel date, within 45 days", expiry:"2026-12-15", terms:["Reward is calculated on the base fare only.","Cancelled bookings are not eligible, including partial cancellations.","Reward is reviewed after the journey date has passed."]},
+  {id:"SMP-1004", sample:true, title:"Reward on monthly mobile recharges", merchant:"Sample Recharge Service", cat:"recharge", type:"flat", rate:25, cap:25, min:299, methods:["UPI","Debit card","Credit card"], credit:"Within 7 days of a verified transaction", expiry:"2026-11-30", terms:["Limited to two rewards per user per month.","Recharge must be completed in a single transaction.","Failed or reversed recharges are not eligible."]},
+  {id:"SMP-1005", sample:true, title:"Cashback on fashion orders above the minimum", merchant:"Demo Fashion Co.", cat:"fashion", type:"percent", rate:8, cap:300, min:1299, methods:["Credit card","Debit card","UPI"], credit:"After the return window closes, within 40 days", expiry:"2026-10-20", terms:["Reward is held until the merchant's return window has closed.","Items returned or exchanged are removed from the eligible value.","Maximum one reward per order."]},
+  {id:"SMP-1006", sample:true, title:"Reward on electricity and utility bill payments", merchant:"Sample Bill Desk", cat:"bills", type:"flat", rate:20, cap:20, min:500, methods:["UPI","Net banking"], credit:"Within 10 days of a verified transaction", expiry:"2026-12-31", terms:["One reward per biller per billing cycle.","Payments that are later reversed by the biller are not eligible."]},
+  {id:"SMP-1007", sample:true, title:"Cashback on food delivery orders", merchant:"Demo Food Delivery", cat:"food", type:"percent", rate:10, cap:120, min:399, methods:["UPI","Credit card"], credit:"Within 20 days of a verified transaction", expiry:"2026-09-28", terms:["Reward is calculated on the item total before packaging and delivery charges.","Three rewards per user per month under this offer.","Orders cancelled after placement are not eligible."]},
+  {id:"SMP-1008", sample:true, title:"Reward on pharmacy and lab test bookings", merchant:"Sample Health Store", cat:"health", type:"percent", rate:6, cap:150, min:799, methods:["UPI","Debit card","Credit card"], credit:"Within 25 days of a verified transaction", expiry:"2026-11-15", terms:["Prescription items may be excluded where the merchant restricts them.","Reward applies to the payable amount after merchant discounts."]},
+  {id:"SMP-1009", sample:true, title:"Cashback on streaming subscription renewals", merchant:"Placeholder Streaming", cat:"entertainment", type:"flat", rate:50, cap:50, min:499, methods:["Credit card","Debit card"], credit:"Within 30 days of a verified transaction", expiry:"2026-10-10", terms:["Applies to annual plans only.","One reward per subscription per year."]},
+  {id:"SMP-1010", sample:true, title:"Reward on beauty and skincare orders", merchant:"Demo Beauty Shop", cat:"beauty", type:"percent", rate:7, cap:200, min:899, methods:["UPI","Credit card"], credit:"Within 30 days of a verified transaction", expiry:"2026-12-05", terms:["Reward is confirmed after the merchant's return window closes.","Sample kits and gift cards are excluded."]},
+  {id:"SMP-1011", sample:true, title:"Cashback on marketplace orders", merchant:"Sample Marketplace", cat:"shopping", type:"percent", rate:3, cap:180, min:999, methods:["Credit card","Debit card","Net banking","UPI"], credit:"Within 35 days of a verified transaction", expiry:"2026-11-22", terms:["Excludes gift cards, digital top-ups and gold purchases.","Reward is calculated per order, not per item."]},
+  {id:"SMP-1012", sample:true, title:"Reward at participating neighbourhood stores", merchant:"Demo Local Store Network", cat:"local", type:"flat", rate:40, cap:40, min:750, methods:["UPI"], credit:"Within 14 days of a verified transaction", expiry:"2026-10-05", terms:["Available only at stores listed as participating on the offer page.","The store must scan the Saveza offer code at the time of payment.","One reward per store per week."]}
+];
+
+/* Category counts are derived from the offer records, never typed in. */
+const activeOffers = () => OFFERS.filter(o => new Date(o.expiry) >= new Date("2026-09-13"));
+const countFor = k => activeOffers().filter(o => o.cat === k).length;
+
+/* Demo reward ledger for the account preview. */
+const LEDGER = [
+  {d:"2026-09-08", o:"SMP-1004", desc:"Reward on monthly mobile recharges", amt:25,  st:"credited"},
+  {d:"2026-09-05", o:"SMP-1007", desc:"Cashback on food delivery orders",   amt:64,  st:"confirmed"},
+  {d:"2026-09-02", o:"SMP-1011", desc:"Cashback on marketplace orders",     amt:112, st:"pending"},
+  {d:"2026-08-27", o:"SMP-1005", desc:"Cashback on fashion orders",         amt:0,   st:"rejected", why:"Order was returned within the merchant's return window."},
+  {d:"2026-08-19", o:"SMP-1002", desc:"Flat reward on first grocery order",  amt:75,  st:"credited"}
+];
+
+/* ---------- 4. FORMATTERS ---------- */
+const inr = n => "₹" + new Intl.NumberFormat("en-IN").format(Math.round(n));
+const dmy = s => new Date(s).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+const daysLeft = s => Math.ceil((new Date(s) - new Date("2026-09-13")) / 86400000);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const rewardLabel = o => o.type === "percent" ? `${o.rate}%` : inr(o.rate);
+const computeReward = (o, spend) => spend < o.min ? 0
+  : Math.min(o.type === "percent" ? spend * o.rate / 100 : o.rate, o.cap);
+
+/* ---------- 5. LOGO ---------- */
+function logoMark(size = 34, ring = "#0F6E5C", s = "#F2A63B"){
+  return `<svg width="${size}" height="${size}" viewBox="0 0 64 64" role="img" aria-hidden="true">
+    <rect width="64" height="64" rx="17" fill="${ring}"/>
+    <path d="M45.5 21.5c-1.5-4.2-7.2-6.4-12.6-4.9-5.6 1.6-7.4 7.2-3.3 10 3.2 2.2 9.2 2.4 12.4 4.8 4.3 3.2 2.9 9.2-2.3 11.1-5.4 2-12.1.2-14.2-4"
+      fill="none" stroke="${s}" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="24.6" cy="41.4" r="3.4" fill="#fff"/>
+  </svg>`;
+}
+function logoLock(size = 34, wordColor = "#08312B", ring = "#0F6E5C", s = "#F2A63B"){
+  return `${logoMark(size, ring, s)}<span style="font-family:var(--display);font-weight:800;font-size:${size*.63}px;letter-spacing:-.035em;color:${wordColor}">Saveza</span>`;
+}
+
+/* ---------- 6. HERO ILLUSTRATION ---------- */
+function heroArt(){
+  return `<svg viewBox="0 0 480 470" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a phone showing a payment being completed and a reward being tracked">
+  <defs>
+    <linearGradient id="sk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0F6E5C"/><stop offset="1" stop-color="#0A4C40"/></linearGradient>
+    <linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8BE5F"/><stop offset="1" stop-color="#F2A63B"/></linearGradient>
+  </defs>
+  <circle cx="240" cy="230" r="196" fill="#E4F0EC"/>
+  <circle cx="240" cy="230" r="150" fill="#EDF6F3"/>
+  <!-- reward cycle arc -->
+  <path d="M92 214a148 148 0 0 1 268-52" stroke="#B7D8CF" stroke-width="2.5" stroke-dasharray="7 9" fill="none"/>
+  <path d="M354 150l8 15 -17 2z" fill="#B7D8CF"/>
+  <!-- phone -->
+  <rect x="150" y="62" width="180" height="336" rx="30" fill="#08312B"/>
+  <rect x="158" y="70" width="164" height="320" rx="24" fill="#fff"/>
+  <rect x="212" y="80" width="56" height="7" rx="3.5" fill="#DCE7E4"/>
+  <!-- generic pay screen -->
+  <text x="180" y="126" font-family="Inter,sans-serif" font-size="11" fill="#5A716C">Paying</text>
+  <rect x="180" y="136" width="86" height="9" rx="4.5" fill="#DDE8E5"/>
+  <text x="180" y="188" font-family="Bricolage Grotesque,Inter,sans-serif" font-weight="800" font-size="40" fill="#08312B">₹2,000</text>
+  <rect x="180" y="206" width="120" height="8" rx="4" fill="#EAF1EF"/>
+  <rect x="180" y="242" width="120" height="34" rx="10" fill="#F2F7F5"/>
+  <rect x="192" y="254" width="18" height="11" rx="2.5" fill="#C6D9D4"/>
+  <rect x="220" y="256" width="60" height="7" rx="3.5" fill="#D5E3DF"/>
+  <rect x="180" y="296" width="120" height="40" rx="14" fill="url(#sk)"/>
+  <rect x="216" y="313" width="48" height="7" rx="3.5" fill="#9FD3C6"/>
+  <rect x="196" y="356" width="88" height="7" rx="3.5" fill="#E7EFED"/>
+  <!-- reward ticket -->
+  <g class="hero-anim">
+    <rect x="286" y="196" width="176" height="92" rx="18" fill="#fff" stroke="#E0EAE7"/>
+    <rect x="286" y="196" width="176" height="92" rx="18" fill="none" stroke="#E0EAE7"/>
+    <circle cx="286" cy="252" r="9" fill="#EDF6F3"/><circle cx="462" cy="252" r="9" fill="#EDF6F3"/>
+    <path d="M298 252h152" stroke="#DCE8E4" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <circle cx="312" cy="224" r="15" fill="#FDF2E0"/>
+    <path d="M306 224l4.5 4.5 8-8.5" stroke="#F2A63B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="338" y="221" font-family="Inter,sans-serif" font-size="11" fill="#5A716C">Reward tracked</text>
+    <text x="338" y="238" font-family="Bricolage Grotesque,Inter,sans-serif" font-weight="800" font-size="17" fill="#08312B">₹100 cashback</text>
+    <text x="300" y="273" font-family="Inter,sans-serif" font-size="10.5" fill="#5A716C">5% up to ₹100 · pending verification</text>
+  </g>
+  <!-- coupon + savings glyphs -->
+  <g transform="translate(24,268)">
+    <rect width="118" height="70" rx="16" fill="#fff" stroke="#E0EAE7"/>
+    <rect x="14" y="16" width="34" height="34" rx="10" fill="#E5F2EE"/>
+    <path d="M24 33l7-9 7 9-7 9z" fill="#0F6E5C" opacity=".8"/>
+    <rect x="58" y="22" width="46" height="7" rx="3.5" fill="#E7EFED"/>
+    <rect x="58" y="36" width="30" height="7" rx="3.5" fill="#EFF4F2"/>
+  </g>
+  <g transform="translate(330,332)">
+    <rect width="106" height="58" rx="15" fill="url(#gd)"/>
+    <rect x="16" y="17" width="44" height="8" rx="4" fill="#fff" opacity=".85"/>
+    <rect x="16" y="33" width="66" height="8" rx="4" fill="#fff" opacity=".55"/>
+  </g>
+</svg>`;
+}
+</script>
+<script>
+/* ---------- 7. SHARED COMPONENTS ---------- */
+function offerCard(o){
+  const c = catBy(o.cat), dl = daysLeft(o.expiry);
+  return `<article class="offer">
+    <div class="offer-top">
+      <div class="offer-strip" style="background:linear-gradient(135deg,${c.c} 0%,${c.c}cc 100%)">
+        <div class="amt">${o.type==="percent"?`${o.rate}<span>%</span>`:`<span>₹</span>${o.rate}`}
+          <div style="font-family:var(--sans);font-size:.72rem;font-weight:500;opacity:.85;letter-spacing:0">${o.type==="percent"?`up to ${inr(o.cap)}`:"flat reward"}</div>
+        </div>
+        <div style="opacity:.9">${ico(c.i,30,"#fff",1.6)}</div>
+      </div>
+      <h3>${esc(o.title)}</h3>
+      <div class="offer-mer"><span>${esc(o.merchant)}</span>${o.sample?'<span class="chip chip-sample">Sample offer</span>':""}</div>
+    </div>
+    <div class="perf"></div>
+    <div class="offer-bot">
+      <dl style="margin:0">
+        <div class="kv"><dt>Minimum spend</dt><dd>${inr(o.min)}</dd></div>
+        <div class="kv"><dt>Maximum reward</dt><dd>${inr(o.cap)}</dd></div>
+        <div class="kv"><dt>Eligible payment</dt><dd>${o.methods.join(", ")}</dd></div>
+      </dl>
+      <div class="offer-foot">
+        <span class="expiry ${dl<=14?"soon":""}">${dl>0?`Valid until ${dmy(o.expiry)}`:"Offer ended"}</span>
+        <button class="btn btn-ghost btn-sm" data-offer="${o.id}">View terms</button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function offerDrawer(o){
+  const c = catBy(o.cat);
+  return `<div class="drawer" role="dialog" aria-modal="true" aria-label="${esc(o.title)}">
+    <div style="padding:26px 28px 0">
+      <div class="mrow">
+        <div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+            <span class="chip" style="background:${c.bg};color:${c.c}">${c.n}</span>
+            ${o.sample?'<span class="chip chip-sample">Sample offer — development data</span>':""}
+          </div>
+          <h2 style="font-size:1.5rem">${esc(o.title)}</h2>
+          <p style="color:var(--muted);margin-top:6px;font-size:.92rem">${esc(o.merchant)} · Offer ID ${o.id}</p>
+        </div>
+        <button class="x" data-close aria-label="Close">×</button>
+      </div>
+    </div>
+    <div style="padding:20px 28px 28px">
+      <div class="card pad" style="box-shadow:none;background:var(--brand-tint);border-color:#CFE4DE">
+        <div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+          <div><div style="font-size:.82rem;color:var(--muted)">Reward</div><div style="font-family:var(--display);font-weight:800;font-size:1.7rem;color:var(--ink)">${rewardLabel(o)}</div></div>
+          <div><div style="font-size:.82rem;color:var(--muted)">Maximum</div><div style="font-family:var(--display);font-weight:800;font-size:1.7rem;color:var(--ink)">${inr(o.cap)}</div></div>
+          <div><div style="font-size:.82rem;color:var(--muted)">Minimum spend</div><div style="font-family:var(--display);font-weight:800;font-size:1.7rem;color:var(--ink)">${inr(o.min)}</div></div>
+        </div>
+      </div>
+      <dl style="margin:22px 0 0">
+        <div class="kv" style="padding:11px 0;border-bottom:1px solid var(--line)"><dt>Eligible payment methods</dt><dd>${o.methods.join(", ")}</dd></div>
+        <div class="kv" style="padding:11px 0;border-bottom:1px solid var(--line)"><dt>Offer valid until</dt><dd>${dmy(o.expiry)}</dd></div>
+        <div class="kv" style="padding:11px 0;border-bottom:1px solid var(--line)"><dt>Reward credited</dt><dd>${esc(o.credit)}</dd></div>
+      </dl>
+      <h3 style="margin:24px 0 10px">Terms of this offer</h3>
+      <ul style="padding-left:20px;color:var(--muted);font-size:.92rem;margin:0">
+        ${o.terms.map(t=>`<li style="margin-bottom:8px">${esc(t)}</li>`).join("")}
+      </ul>
+      <div class="callout">A reward is only credited after the transaction is verified. If a transaction is cancelled, refunded or reversed, the reward is withdrawn.</div>
+      <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+        <button class="btn btn-primary" data-auth="join">Join to use this offer</button>
+        <button class="btn btn-ghost" data-close>Close</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function categoryGrid(){
+  return `<div class="cats">${CATEGORIES.map(c=>`
+    <a class="cat" href="#/offers?cat=${c.k}">
+      <div class="cat-ico" style="background:${c.bg};color:${c.c}">${ico(c.i,24,c.c,1.8)}</div>
+      <h3>${c.n}</h3><p>${c.d}</p>
+      <span class="count">${countFor(c.k)} ${countFor(c.k)===1?"offer":"offers"} live</span>
+    </a>`).join("")}</div>`;
+}
+
+function stepsBlock(){
+  const st = [
+    ["Discover","Browse offers by category or search for the purchase you are about to make."],
+    ["Check","Read the eligibility, the reward rate, the cap and the minimum spend before you buy."],
+    ["Purchase","Complete the transaction using a payment method the offer accepts."],
+    ["Reward","Once the transaction is verified against the offer terms, the applicable reward is credited."]
+  ];
+  return `<div class="steps">${st.map(([h,p])=>`<div class="step"><h3>${h}</h3><p>${p}</p></div>`).join("")}</div>`;
+}
+
+function calculator(){
+  const list = activeOffers();
+  return `<div class="calc" id="calc">
+    <div class="calc-in">
+      <h3 style="font-size:1.3rem;margin-bottom:6px">Work out a reward before you buy</h3>
+      <p style="font-size:.92rem;color:var(--muted);margin-bottom:22px">Pick an offer and a purchase amount. The reward is the smaller of the two: the percentage of your spend, or the offer's cap.</p>
+      <label class="lbl" for="c-offer">Offer</label>
+      <select class="field" id="c-offer" style="width:100%">
+        ${list.map(o=>`<option value="${o.id}">${esc(o.title)} — ${rewardLabel(o)}</option>`).join("")}
+      </select>
+      <label class="lbl" for="c-amt" style="margin-top:18px">Purchase amount</label>
+      <input class="field" id="c-amt" type="number" min="0" step="50" value="2000" style="width:100%">
+      <input class="range" id="c-range" type="range" min="0" max="20000" step="50" value="2000" aria-label="Purchase amount slider">
+    </div>
+    <div class="calc-out" id="calc-out"></div>
+  </div>`;
+}
+
+</script>
+<script>
+/* ---------- 8. PAGES ---------- */
+const VIEWS = {};
+
+VIEWS.home = () => `
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Pay smart. Save more.</h1>
+      <p class="lede">Discover cashback, rewards and offers on eligible purchases and payments with Saveza.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#/offers">Explore offers</a>
+        <a class="btn btn-ghost" href="#/how-it-works">How Saveza works</a>
+      </div>
+      <p class="hero-fine">Rewards are subject to offer eligibility and terms.</p>
+    </div>
+    <div class="hero-art">${heroArt()}</div>
+  </div>
+</section>
+
+<section class="section-tight"><div class="wrap">
+  <div class="trust">
+    ${[["shield","Clear offers","See the eligibility rules, reward rate and cap before you decide to buy."],
+       ["eye","Reward tracking","Every eligible transaction shows its status in your account until it is settled."],
+       ["doc","Transparent terms","Minimum spend, maximum reward and the crediting timeline are stated on each offer."],
+       ["chat","Support that reviews","If a reward is missing or looks wrong, you can raise it and have it checked."]]
+      .map(([k,h,p])=>`<div class="trust-i"><div class="tico">${ico(I[k],21)}</div><h3>${h}</h3><p>${p}</p></div>`).join("")}
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="head">
+    <div><h2>Today's offers</h2><p class="lede">Sorted by the offers closest to expiry. Every card shows what you need to spend and the most you can get back.</p></div>
+    <a class="btn btn-ghost btn-sm" href="#/offers">See all ${activeOffers().length} offers</a>
+  </div>
+  <div class="offers-page">${activeOffers().slice().sort((a,b)=>daysLeft(a.expiry)-daysLeft(b.expiry)).slice(0,6).map(offerCard).join("")}</div>
+</div></section>
+
+<section class="section" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <div class="head"><div><h2>Browse by category</h2><p class="lede">Offer counts come straight from the offers database and change as offers start and expire.</p></div></div>
+  ${categoryGrid()}
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="head"><div><h2>How Saveza works</h2><p class="lede">Four steps, in the order they actually happen. Not every payment carries a reward — the offer decides.</p></div></div>
+  ${stepsBlock()}
+  <p style="margin-top:26px;font-size:.9rem;color:var(--muted);max-width:70ch">Crediting timelines differ by offer. Some rewards are credited within days; others wait until a return window has closed or a travel date has passed. The timeline is printed on each offer.</p>
+</div></section>
+
+<section class="section" style="background:#fff;border-top:1px solid var(--line)"><div class="wrap">
+  <div class="head"><div><h2>How cashback is calculated</h2><p class="lede">Cashback is a reward attached to an eligible transaction under a specific offer. Each offer sets its own rules.</p></div>
+  <a class="btn btn-quiet" href="#/cashback">Read the full explanation</a></div>
+  ${calculator()}
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="grid g2" style="align-items:stretch">
+    <div class="card pad" style="padding:32px">
+      <h2 style="font-size:1.6rem;margin-bottom:12px">Refer a friend</h2>
+      <p style="color:var(--muted);margin-bottom:18px">Share your referral code. When someone joins with it and completes their first eligible transaction, a referral reward is applied to both accounts under the referral terms.</p>
+      <a class="btn btn-primary btn-sm" href="#/refer">See referral terms</a>
+    </div>
+    <div class="card pad" style="padding:32px;background:linear-gradient(150deg,var(--ink) 0%,#0B4A3F 100%);border:0;color:#DCEBE7">
+      <h2 style="font-size:1.6rem;margin-bottom:12px;color:#fff">Something missing?</h2>
+      <p style="margin-bottom:18px;color:#B9D2CD">If a reward has not appeared after the stated timeline, raise it from your account and support will review the transaction against the offer terms.</p>
+      <a class="btn btn-gold btn-sm" href="#/help">Get help</a>
+    </div>
+  </div>
+</div></section>`;
+
+VIEWS.offers = (q) => {
+  const cat = q.cat || "all";
+  return `<section class="section"><div class="wrap">
+    <h1 style="font-size:2.4rem">Offers</h1>
+    <p class="lede" style="margin-top:12px">${activeOffers().length} live offers. Check the eligibility on each one before you pay — the reward depends on it.</p>
+    <div class="filters" style="margin-top:28px">
+      <input class="field search" id="q" type="search" placeholder="Search offers or merchants" aria-label="Search offers">
+      <select class="field" id="sort" aria-label="Sort offers">
+        <option value="expiry">Ending soonest</option>
+        <option value="cap">Highest maximum reward</option>
+        <option value="min">Lowest minimum spend</option>
+      </select>
+    </div>
+    <div class="pills" id="pills">
+      <button class="pill ${cat==="all"?"on":""}" data-cat="all">All</button>
+      ${CATEGORIES.map(c=>`<button class="pill ${cat===c.k?"on":""}" data-cat="${c.k}">${c.n} (${countFor(c.k)})</button>`).join("")}
+    </div>
+    <div class="offers-page" id="results"></div>
+    <p id="empty" style="display:none;padding:50px 0;text-align:center;color:var(--muted)">No offers match that. Clear the search or pick another category.</p>
+    <p style="margin-top:34px;font-size:.86rem;color:var(--muted)">All offers on this build are development samples. Merchant names are placeholders and no offer here can be redeemed.</p>
+  </div></section>`;
+};
+
+VIEWS.categories = () => `<section class="section"><div class="wrap">
+  <h1 style="font-size:2.4rem">Categories</h1>
+  <p class="lede" style="margin-top:12px">Offer counts are calculated from live records in the offers database, not entered by hand.</p>
+  <div style="margin-top:32px">${categoryGrid()}</div>
+</div></section>`;
+
+VIEWS["how-it-works"] = () => `<section class="section"><div class="wrap">
+  <h1 style="font-size:2.4rem">How Saveza works</h1>
+  <p class="lede" style="margin-top:12px">Saveza sits between you and an offer. It does not process your payment and it does not decide your purchase — it tells you which offer applies and tracks what you are owed under it.</p>
+  <div style="margin-top:44px">${stepsBlock()}</div>
+  <div class="grid g2" style="margin-top:52px">
+    <div class="card pad"><h3>What Saveza does not do</h3>
+      <ul style="padding-left:18px;color:var(--muted);font-size:.93rem;margin:12px 0 0">
+        <li style="margin-bottom:7px">It does not hold your money or act as a wallet.</li>
+        <li style="margin-bottom:7px">It does not process payments or operate as a UPI application.</li>
+        <li style="margin-bottom:7px">It does not lend, invest or promise any return.</li>
+        <li>It does not guarantee a reward on every payment.</li>
+      </ul></div>
+    <div class="card pad"><h3>When a reward can fall through</h3>
+      <ul style="padding-left:18px;color:var(--muted);font-size:.93rem;margin:12px 0 0">
+        <li style="margin-bottom:7px">The transaction was below the offer's minimum spend.</li>
+        <li style="margin-bottom:7px">A payment method outside the offer's list was used.</li>
+        <li style="margin-bottom:7px">The order was cancelled, returned or refunded.</li>
+        <li>The offer's per-user or per-month limit was already reached.</li>
+      </ul></div>
+  </div>
+  <div style="margin-top:44px">
+    <h2>Reward statuses</h2>
+    <div class="card" style="margin-top:18px;overflow:hidden"><table class="tbl">
+      <tbody>
+        <tr><td style="width:170px"><span class="st st-pending">${ico(I.clock,15,"currentColor",2)} Pending</span></td><td style="color:var(--muted)">The transaction has been picked up and is waiting to be verified against the offer terms.</td></tr>
+        <tr><td><span class="st st-confirmed">${ico(I.shield,15,"currentColor",2)} Confirmed</span></td><td style="color:var(--muted)">The transaction passed verification. The reward is now waiting on the offer's crediting timeline.</td></tr>
+        <tr><td><span class="st st-credited">${ico(I.shield,15,"currentColor",2)} Credited</span></td><td style="color:var(--muted)">The reward has been paid out according to the offer terms.</td></tr>
+        <tr><td><span class="st st-rejected">${ico(I.eye,15,"currentColor",2)} Not eligible</span></td><td style="color:var(--muted)">The transaction did not meet the terms. The reason is shown against the entry, and you can ask support to review it.</td></tr>
+      </tbody></table></div>
+  </div>
+</div></section>`;
+
+VIEWS.cashback = () => `<section class="section"><div class="wrap">
+  <div style="max-width:70ch"><h1 style="font-size:2.4rem">How cashback works</h1>
+  <p class="lede" style="margin-top:14px">Cashback is a reward associated with eligible transactions under a specific offer. Each offer can set its own eligibility requirements, minimum purchase amount, maximum reward and verification timeline.</p></div>
+  <div style="margin-top:40px">${calculator()}</div>
+  <div class="grid g3" style="margin-top:20px">
+    <div class="card pad"><h3>The rate</h3><p style="color:var(--muted);font-size:.93rem;margin-top:8px">Either a percentage of the eligible transaction value, or a flat amount. The offer states which.</p></div>
+    <div class="card pad"><h3>The cap</h3><p style="color:var(--muted);font-size:.93rem;margin-top:8px">The most that offer will ever pay on one transaction, however large the purchase.</p></div>
+    <div class="card pad"><h3>The eligible value</h3><p style="color:var(--muted);font-size:.93rem;margin-top:8px">Usually the item total. Delivery, taxes and separately funded discounts are commonly excluded — check the offer.</p></div>
+  </div>
+  <div class="prose" style="margin-top:48px">
+    <h2>A worked example</h2>
+    <p>Take an offer paying 5% cashback, capped at ₹100, with a minimum spend of ₹999.</p>
+    <ul>
+      <li>You spend ₹2,000. Five percent of that is ₹100, which equals the cap, so the reward is ₹100.</li>
+      <li>You spend ₹4,000. Five percent is ₹200, but the cap holds the reward at ₹100.</li>
+      <li>You spend ₹800. That is below the ₹999 minimum, so no reward applies.</li>
+    </ul>
+    <p>This is an illustration of the arithmetic, not a live offer.</p>
+    <h2>Why a reward can take time</h2>
+    <p>A merchant confirms a transaction to Saveza only after their own checks. Where an order can still be returned or a booking cancelled, the reward is held until that window closes. The crediting timeline printed on each offer reflects this, and it is the timeline Saveza is held to.</p>
+    <h2>If a reward does not appear</h2>
+    <p>Wait for the stated timeline to pass, then raise it from your account with the transaction details. Support will check the transaction against the offer terms and tell you which term decided the outcome.</p>
+  </div>
+</div></section>`;
+
+VIEWS.refer = () => `<section class="section"><div class="wrap">
+  <div style="max-width:70ch"><h1 style="font-size:2.4rem">Refer a friend</h1>
+  <p class="lede" style="margin-top:14px">Share your code. When someone joins with it and completes their first eligible transaction, a referral reward is applied to both accounts under the referral terms.</p></div>
+  <div class="grid g3" style="margin-top:40px">
+    ${[["Share your code","Every account gets a referral code once it is verified."],
+       ["They join and buy","Your friend signs up with the code and completes one eligible transaction."],
+       ["Both get the reward","The referral reward is credited to both accounts after that transaction is verified."]]
+      .map(([h,p])=>`<div class="card pad"><h3>${h}</h3><p style="color:var(--muted);font-size:.93rem;margin-top:8px">${p}</p></div>`).join("")}
+  </div>
+  <div class="card pad" style="margin-top:24px;padding:28px">
+    <h3>Referral terms</h3>
+    <ul style="padding-left:18px;color:var(--muted);font-size:.93rem;margin:14px 0 0">
+      <li style="margin-bottom:8px">The referral reward amount and any monthly limit are set in the admin console and shown on this page once configured.</li>
+      <li style="margin-bottom:8px">A referral counts once, for a new account only. Duplicate accounts, shared devices and self-referrals are removed.</li>
+      <li style="margin-bottom:8px">If the referred transaction is cancelled or refunded, the referral reward is withdrawn from both accounts.</li>
+      <li>Saveza can pause or end the referral programme, and will state the date it does so.</li>
+    </ul>
+    <div class="callout">Referring is not a source of income and Saveza does not present it as one. There is no payment for recruiting people, no tiered structure and no earning from anyone else's referrals.</div>
+  </div>
+</div></section>`;
+
+VIEWS.account = () => {
+  const tot = LEDGER.filter(r=>r.st==="credited").reduce((s,r)=>s+r.amt,0);
+  const pend = LEDGER.filter(r=>r.st==="pending"||r.st==="confirmed").reduce((s,r)=>s+r.amt,0);
+  return `<section class="section"><div class="wrap">
+  <span class="chip chip-sample" style="margin-bottom:14px">Preview screen — sample ledger, no account is connected</span>
+  <h1 style="font-size:2.4rem">Your rewards</h1>
+  <div class="grid g3" style="margin-top:28px">
+    <div class="card pad"><div style="font-size:.85rem;color:var(--muted)">Credited so far</div><div style="font-family:var(--display);font-weight:800;font-size:2.2rem;margin-top:4px">${inr(tot)}</div></div>
+    <div class="card pad"><div style="font-size:.85rem;color:var(--muted)">Awaiting verification or credit</div><div style="font-family:var(--display);font-weight:800;font-size:2.2rem;margin-top:4px">${inr(pend)}</div></div>
+    <div class="card pad"><div style="font-size:.85rem;color:var(--muted)">Transactions tracked</div><div style="font-family:var(--display);font-weight:800;font-size:2.2rem;margin-top:4px">${LEDGER.length}</div></div>
+  </div>
+  <div class="card" style="margin-top:24px;overflow:auto"><table class="tbl">
+    <thead><tr><th>Date</th><th>Offer</th><th>Status</th><th class="num">Reward</th></tr></thead>
+    <tbody>${LEDGER.map(r=>`<tr>
+      <td style="white-space:nowrap;color:var(--muted)">${dmy(r.d)}</td>
+      <td><div style="font-weight:500">${esc(r.desc)}</div><div style="font-size:.82rem;color:var(--muted)">${r.o}</div>${r.why?`<div style="font-size:.82rem;color:var(--stop);margin-top:4px">${esc(r.why)}</div>`:""}</td>
+      <td><span class="st st-${r.st}">${{pending:"Pending",confirmed:"Confirmed",credited:"Credited",rejected:"Not eligible"}[r.st]}</span></td>
+      <td class="num" style="font-weight:600">${r.st==="rejected"?"—":inr(r.amt)}</td></tr>`).join("")}</tbody>
+  </table></div>
+  <p style="margin-top:20px;font-size:.86rem;color:var(--muted)">A reward stays pending until the merchant confirms the transaction. If you think an entry is wrong, raise it from <a class="linky" href="#/help">Help</a> within 60 days of the transaction.</p>
+</div></section>`;
+};
+
+VIEWS.help = () => `<section class="section"><div class="wrap">
+  <h1 style="font-size:2.4rem">Help and support</h1>
+  <p class="lede" style="margin-top:12px">Most questions are about a reward that has not arrived yet. Start with the crediting timeline printed on the offer.</p>
+  <div class="grid g2" style="margin-top:34px;align-items:start">
+    <div class="faq">
+      ${[["Why has my cashback not been credited?","Check the crediting timeline on the offer first — many rewards are held until a return window closes or a travel date passes. If the timeline has passed, raise the transaction from your account and support will check it against the offer terms."],
+         ["Is cashback guaranteed on every payment?","No. A reward applies only where an offer covers the purchase and the transaction meets that offer's terms, including the minimum spend and the eligible payment methods."],
+         ["Why was my transaction marked not eligible?","The common reasons are a spend below the minimum, a payment method the offer does not accept, a cancelled or returned order, or a per-user limit that was already reached. The specific reason is shown against the entry."],
+         ["Can I use two Saveza offers on one purchase?","Only if both offers say so. Most offers state that they cannot be combined."],
+         ["What happens if I return part of my order?","The returned value is removed from the eligible amount and the reward is recalculated. If the whole order is returned, the reward is withdrawn."],
+         ["How do I close my account and delete my data?","Write to the support email from the address on your account. Deletion is handled under the privacy policy, subject to records the operator is required to retain."],
+         ["Does Saveza charge users anything?","No fee is charged to users for browsing offers or receiving rewards. Any change to that would be published before it took effect."],
+         ["How do I escalate a complaint?","If support has not resolved your issue within the stated response time, write to the grievance officer at the grievance email listed in the footer, quoting your earlier ticket."]]
+        .map(([q,a])=>`<details><summary>${q}</summary><div class="ans">${a}</div></details>`).join("")}
+    </div>
+    <div class="stack">
+      <div class="card pad"><h3>Contact support</h3>
+        <dl style="margin:14px 0 0">
+          <div class="bizrow"><dt>Email</dt><dd>${cfg("supportEmail")}</dd></div>
+          <div class="bizrow"><dt>Phone</dt><dd>${cfg("supportPhone")}</dd></div>
+          <div class="bizrow" style="border-bottom:0"><dt>Hours</dt><dd>${cfg("supportHours")}</dd></div>
+        </dl></div>
+    </div>
+  </div>
+</div></section>`;
+
+VIEWS.about = () => `<section class="section"><div class="wrap">
+  <div class="prose">
+    <h1 style="font-size:2.4rem">About Saveza</h1>
+    <p class="lede" style="margin:16px 0 30px">Saveza is a consumer rewards platform designed to help people discover relevant offers and savings opportunities while shopping and making eligible payments.</p>
+    <h2>What Saveza does</h2>
+    <p>Saveza collects offers in one place, states their terms in plain language, and tracks whether a transaction qualified for a reward. It is a discovery and tracking layer. It does not take custody of money, process payments, or replace the app you pay with.</p>
+    <h2>Who it is for</h2>
+    <p>People in India who already shop and pay online and would rather know in advance whether an offer applies, what it caps out at, and when the money actually arrives.</p>
+    <h2>How offers are created</h2>
+    <p>An offer is published only when its terms are complete: reward rate, maximum reward, minimum spend, eligible payment methods, validity dates and crediting timeline. An offer with a missing field cannot be published, because the user-facing page would then be incomplete.</p>
+    <h2>How cashback is calculated</h2>
+    <p>The reward is the lower of the rate applied to the eligible transaction value and the offer's cap, provided the transaction is at or above the minimum spend. The eligible value excludes anything the offer excludes — commonly delivery, taxes and separately funded discounts.</p>
+    <h2>How rewards are tracked</h2>
+    <p>Each tracked transaction moves through pending, then either confirmed and credited, or not eligible with a stated reason. The status and the reason are visible from the account for the life of the record.</p>
+    <h2>How support works</h2>
+    <p>Support is the first line for a missing or disputed reward and reviews the transaction against the offer terms. Unresolved issues escalate to the grievance officer named below.</p>
+    <h2>What Saveza is not</h2>
+    <p>Saveza is not a bank, a lender, an investment product, a wallet or a UPI application, and it does not offer any income or return. Rewards depend entirely on offer eligibility.</p>
+  </div>
+</div></section>`;
+
+const legalPage = (title, sections) => `<section class="section"><div class="wrap"><div class="prose">
+  <h1 style="font-size:2.2rem">${title}</h1>
+  <p style="margin-top:14px;color:var(--muted)">Last updated: ${cfg("lastUpdated")}</p>
+  <div class="callout" style="margin:20px 0 30px">This is a drafting outline, not a finished legal document. The headings mark what this policy has to cover for a rewards platform operating in India. The operator's lawyer must write and approve the actual text before publication.</div>
+  ${sections.map(([h,p])=>`<h2>${h}</h2><p>${p}</p>`).join("")}
+</div></div></section>`;
+
+VIEWS.terms = () => legalPage("Terms of use", [
+  ["Who these terms are between","Identify the operating entity, the user, and the fact that using Saveza means accepting these terms."],
+  ["What the service is","State that Saveza lists offers and tracks eligible rewards, and that it is not a payment service, wallet or financial institution."],
+  ["Eligibility to use","Minimum age, one account per person, accurate registration details."],
+  ["How offers and rewards work","Rewards depend on offer terms; offers can change or be withdrawn; verification is required before crediting; reversal on cancellation or refund."],
+  ["Prohibited conduct","Fraudulent transactions, duplicate accounts, automated abuse, and the consequences including forfeiture of rewards."],
+  ["Merchant relationship","Saveza is not the seller; disputes about goods or services are between the user and the merchant."],
+  ["Liability and disclaimers","Scope and limits of liability, drafted by counsel."],
+  ["Changes, suspension and termination","How terms change, how notice is given, when an account can be closed."],
+  ["Governing law and disputes","Governing law, jurisdiction, and the grievance route before any formal dispute."]
+]);
+
+VIEWS.privacy = () => legalPage("Privacy policy", [
+  ["What is collected","Account details, transaction data received for reward tracking, device and usage data."],
+  ["Why it is collected","Specify the purpose for each category, as required under the Digital Personal Data Protection Act, 2023."],
+  ["Consent and notice","How consent is taken, what the notice says, and how it can be withdrawn."],
+  ["Who it is shared with","Merchants, affiliate networks and processors, with the purpose of each disclosure."],
+  ["How long it is kept","Retention periods, and what is retained after account closure and why."],
+  ["User rights","Access, correction, erasure, grievance redressal and nomination."],
+  ["Security","Technical and organisational measures, and the breach notification process."],
+  ["Grievance officer","Name and contact of the officer handling data grievances, as listed in the footer."],
+  ["Cookies and tracking","What is set, what it is used for, and how it can be controlled."]
+]);
+
+VIEWS[404] = () => `<section class="section"><div class="wrap" style="text-align:center;padding:60px 0">
+  <h1 style="font-size:2.2rem">That page does not exist</h1>
+  <p class="lede" style="margin:14px auto 26px">The link may be out of date. The offers page is the best place to start.</p>
+  <a class="btn btn-primary" href="#/offers">Explore offers</a>
+</div></section>`;
+</script>
+<script>
+/* ---------- 9. CHROME: bars, nav, footer ---------- */
+const NAV = [["#/","Home"],["#/offers","Offers"],["#/categories","Categories"],["#/how-it-works","How it works"],["#/refer","Refer a friend"],["#/help","Help"]];
+
+function renderChrome(){
+  document.getElementById("logo-slot").outerHTML = `<span id="logo-slot" style="display:flex;align-items:center;gap:9px">${logoLock(34)}</span>`;
+  document.getElementById("nav").innerHTML = NAV.map(([h,l])=>`<a href="${h}">${l}</a>`).join("");
+  document.querySelector("#mnav .wrap").innerHTML =
+    NAV.map(([h,l])=>`<a href="${h}">${l}</a>`).join("") +
+    `<a href="#/account">Your rewards</a><a href="#/about">About Saveza</a>
+     <div class="mact"><button class="btn btn-ghost btn-sm btn-block" data-auth="login">Log in</button>
+     <button class="btn btn-primary btn-sm btn-block" data-auth="join">Join Saveza</button></div>`;
+
+  document.getElementById("ftr").innerHTML = `<div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">${logoLock(32,"#fff","#12836D","#F2A63B")}</div>
+        <p style="font-size:.9rem;max-width:34ch;color:#9FC2BB">Rewards for the way you spend. Saveza helps you find offers, check what you qualify for, and follow a reward until it lands.</p>
+      </div>
+      <div><h4>Product</h4>${[["#/offers","Offers"],["#/categories","Categories"],["#/cashback","How cashback works"],["#/account","Your rewards"]].map(([h,l])=>`<a href="${h}">${l}</a>`).join("")}</div>
+      <div><h4>Company</h4>${[["#/about","About Saveza"],["#/how-it-works","How it works"],["#/refer","Refer a friend"],["#/help","Help and support"]].map(([h,l])=>`<a href="${h}">${l}</a>`).join("")}</div>
+      <div><h4>Legal</h4>${[["#/terms","Terms of use"],["#/privacy","Privacy policy"]].map(([h,l])=>`<a href="${h}">${l}</a>`).join("")}
+        <a href="#/help">Grievance redressal</a></div>
+    </div>
+    <p class="disc" style="margin-top:40px">Saveza is a consumer offers and rewards platform. It is not a bank, a non-banking financial company, a payment system operator, a wallet, a lender or an investment product, and it does not offer any income, return or guaranteed reward. Rewards apply only to transactions that meet the terms of a specific offer and may be withdrawn if a transaction is cancelled, refunded or reversed.</p>
+    <div class="ftr-legal">
+      <span>© ${new Date().getFullYear()} Saveza.</span>
+      <span>Made in India</span>
+    </div>
+  </div>`;
+}
+
+/* ---------- 10. OVERLAYS ---------- */
+const ov = document.getElementById("overlay");
+function closeOverlay(){ ov.innerHTML = ""; document.body.style.overflow = ""; }
+function openOverlay(html){
+  ov.innerHTML = `<div class="scrim" data-scrim>${html}</div>`;
+  document.body.style.overflow = "hidden";
+  const f = ov.querySelector("button,input,select,a");
+  if(f) f.focus();
+}
+ov.addEventListener("click", e => {
+  if(e.target.matches("[data-scrim]") || e.target.closest("[data-close]")) closeOverlay();
+});
+document.addEventListener("keydown", e => { if(e.key === "Escape") closeOverlay(); });
+
+function authModal(mode){
+  const join = mode === "join";
+  openOverlay(`<div class="modal" role="dialog" aria-modal="true" aria-label="${join?"Join Saveza":"Log in"}">
+    <div class="mrow"><h2 style="font-size:1.5rem">${join?"Join Saveza":"Log in"}</h2><button class="x" data-close aria-label="Close">×</button></div>
+    <label class="lbl" for="a-phone">Mobile number</label>
+    <input class="field" id="a-phone" style="width:100%" inputmode="numeric" placeholder="10-digit mobile number">
+    ${join?`<label class="lbl" for="a-ref" style="margin-top:16px">Referral code (optional)</label>
+    <input class="field" id="a-ref" style="width:100%" placeholder="Enter a code if you have one">`:""}
+    <button class="btn btn-primary btn-block" style="margin-top:20px" id="a-go">Send verification code</button>
+    <div class="callout">This build has no backend. Nothing is sent, stored or verified — wire this form to the real authentication service before launch.</div>
+    ${join?`<p style="font-size:.82rem;color:var(--muted);margin-top:14px">Joining means accepting the <a class="linky" href="#/terms" data-close>terms of use</a> and the <a class="linky" href="#/privacy" data-close>privacy policy</a>.</p>`:""}
+  </div>`);
+  const go = document.getElementById("a-go");
+  go.onclick = () => { go.textContent = "Not connected in this build"; go.disabled = true; go.style.opacity = ".65"; };
+}
+
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-auth]");
+  if(a){ authModal(a.dataset.auth); return; }
+  const o = e.target.closest("[data-offer]");
+  if(o){ openOverlay(offerDrawer(OFFERS.find(x => x.id === o.dataset.offer))); }
+});
+
+/* ---------- 11. PAGE BEHAVIOUR ---------- */
+function wireCalculator(){
+  const sel = document.getElementById("c-offer");
+  if(!sel) return;
+  const amt = document.getElementById("c-amt"), rng = document.getElementById("c-range"), out = document.getElementById("calc-out");
+  const draw = () => {
+    const o = OFFERS.find(x => x.id === sel.value);
+    const v = Math.max(0, Number(amt.value) || 0);
+    const r = computeReward(o, v);
+    const uncapped = o.type === "percent" ? v * o.rate / 100 : o.rate;
+    out.innerHTML = `
+      <div style="font-size:.85rem;color:#9FC2BB;margin-bottom:8px">${v < o.min ? "No reward on this amount" : "Reward on this purchase"}</div>
+      <div class="bigrup"><span>₹</span>${new Intl.NumberFormat("en-IN").format(Math.round(r))}</div>
+      ${v < o.min ? `<div class="badge-fail">This offer needs a minimum spend of ${inr(o.min)}. You are ${inr(o.min - v)} short.</div>` : ""}
+      <div style="margin-top:22px">
+        <div class="calc-line"><span>Purchase amount</span><b>${inr(v)}</b></div>
+        <div class="calc-line"><span>Offer rate</span><b>${rewardLabel(o)}</b></div>
+        <div class="calc-line"><span>${o.type === "percent" ? "Rate applied to purchase" : "Flat reward"}</span><b>${inr(uncapped)}</b></div>
+        <div class="calc-line"><span>Maximum reward on this offer</span><b>${inr(o.cap)}</b></div>
+        <div class="calc-line" style="border-bottom:0"><span>Credited</span><b style="font-weight:500;font-size:.84rem;text-align:right;max-width:60%">${esc(o.credit)}</b></div>
+      </div>
+      <p class="calc-note">${uncapped > o.cap && v >= o.min ? `The cap applies here — ${rewardLabel(o)} of ${inr(v)} would be ${inr(uncapped)}, so the reward stops at ${inr(o.cap)}.` : "The reward is the lower of the rate applied to your spend and the offer's cap."} This is an illustration using sample offer data.</p>`;
+  };
+  sel.onchange = draw;
+  amt.oninput = () => { rng.value = Math.min(Number(amt.value) || 0, rng.max); draw(); };
+  rng.oninput = () => { amt.value = rng.value; draw(); };
+  draw();
+}
+
+function wireOffers(q){
+  const box = document.getElementById("results");
+  if(!box) return;
+  let cat = q.cat || "all";
+  const search = document.getElementById("q"), sort = document.getElementById("sort");
+  const paint = () => {
+    const term = (search.value || "").trim().toLowerCase();
+    let list = activeOffers()
+      .filter(o => cat === "all" || o.cat === cat)
+      .filter(o => !term || (o.title + " " + o.merchant + " " + catBy(o.cat).n).toLowerCase().includes(term));
+    const s = sort.value;
+    list.sort((a, b) => s === "cap" ? b.cap - a.cap : s === "min" ? a.min - b.min : daysLeft(a.expiry) - daysLeft(b.expiry));
+    box.innerHTML = list.map(offerCard).join("");
+    document.getElementById("empty").style.display = list.length ? "none" : "block";
+  };
+  search.oninput = paint;
+  sort.onchange = paint;
+  document.getElementById("pills").onclick = e => {
+    const p = e.target.closest("[data-cat]");
+    if(!p) return;
+    cat = p.dataset.cat;
+    document.querySelectorAll("#pills .pill").forEach(el => el.classList.toggle("on", el === p));
+    history.replaceState(null, "", cat === "all" ? "#/offers" : `#/offers?cat=${cat}`);
+    paint();
+  };
+  paint();
+}
+
+/* ---------- 12. ROUTER ---------- */
+function parseHash(){
+  const raw = (location.hash || "#/").slice(1);
+  const [path, qs] = raw.split("?");
+  const q = {};
+  new URLSearchParams(qs || "").forEach((v, k) => q[k] = v);
+  const key = (path.replace(/^\/|\/$/g, "") || "home");
+  return { key, q };
+}
+
+function route(){
+  const { key, q } = parseHash();
+  const view = VIEWS[key] || VIEWS[404];
+  document.getElementById("main").innerHTML = view(q);
+  document.querySelectorAll("#nav a").forEach(a =>
+    a.classList.toggle("on", a.getAttribute("href") === "#/" + (key === "home" ? "" : key)));
+  document.getElementById("mnav").classList.remove("open");
+  document.getElementById("burger").setAttribute("aria-expanded", "false");
+  closeOverlay();
+  wireCalculator();
+  wireOffers(q);
+  const titles = { home:"Rewards for the way you spend", offers:"Offers", categories:"Categories",
+    "how-it-works":"How Saveza works", cashback:"How cashback works", refer:"Refer a friend",
+    account:"Your rewards", help:"Help and support", about:"About Saveza", terms:"Terms of use", privacy:"Privacy policy" };
+  document.title = `Saveza — ${titles[key] || "Page not found"}`;
+  window.scrollTo(0, 0);
+}
+
+document.getElementById("burger").onclick = e => {
+  const m = document.getElementById("mnav"), open = m.classList.toggle("open");
+  e.currentTarget.setAttribute("aria-expanded", String(open));
+};
+
+window.addEventListener("hashchange", route);
+renderChrome();
+route();
+</script>
+</body>
+</html>
