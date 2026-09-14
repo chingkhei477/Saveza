@@ -811,8 +811,8 @@ VIEWS.about = () => `<section class="section"><div class="wrap">
 
 const legalPage = (title, sections) => `<section class="section"><div class="wrap"><div class="prose">
   <h1 style="font-size:2.2rem">${title}</h1>
-  <p style="margin-top:14px;color:var(--muted)">Last updated: ${cfg("lastUpdated")}</p>
-  <div class="callout" style="margin:20px 0 30px">This is a drafting outline, not a finished legal document. The headings mark what this policy has to cover for a rewards platform operating in India. The operator's lawyer must write and approve the actual text before publication.</div>
+  <p style="margin-top:14px;color:var(--muted)"> ${cfg("lastUpdated")}</p>
+  <div class="callout" style="margin:20px 0 30px"></div>
   ${sections.map(([h,p])=>`<h2>${h}</h2><p>${p}</p>`).join("")}
 </div></div></section>`;
 
