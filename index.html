@@ -296,7 +296,7 @@ const SITE_CONFIG = {
   grievanceEmail:    "[REPLACE: GRIEVANCE EMAIL]",
   businessReg:       "[REPLACE: CIN / LLPIN / UDYAM NUMBER — OR DELETE]",
   gstin:             "[REPLACE: GSTIN — OR DELETE IF NOT REGISTERED]",
-  lastUpdated:       "[REPLACE: POLICY LAST-UPDATED DATE]"
+  lastUpdated:       ""
 };
 const isPh = v => typeof v === "string" && v.startsWith("[REPLACE");
 const cfg = k => { const v = SITE_CONFIG[k]; return isPh(v) ? `<span class="ph">${v}</span>` : v; };
